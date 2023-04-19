@@ -4,6 +4,7 @@ import axios from "axios";
 const API = process.env.REACT_APP_API_URL;
 
 export default function Transactions() {
+    console.log("API test", API)
     const [transactions, setTransactions] = useState([]);
     
     useEffect(() => {

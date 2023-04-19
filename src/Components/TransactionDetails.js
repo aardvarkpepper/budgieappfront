@@ -28,7 +28,7 @@ export default function TransactionDetails() {
     };
 
     return (
-        <article>
+        <table>
             <tr>
             <td>
                 <Link to={`/transactions/${index}`}>{transaction.id}</Link>
@@ -68,7 +68,7 @@ export default function TransactionDetails() {
                 </span>
             </td>
         </tr>
-        </article>
+        </table>
     )
 
 }
