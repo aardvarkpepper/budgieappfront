@@ -7,13 +7,15 @@ export default function TransactionDetails({setTotal}) {
     //test const vs let
     let navigate = useNavigate();
     const [transaction, setTransaction] = useState({});
+    const [placeholder, setPlaceholder] = useState(0);
     let { index } = useParams();
 
     useEffect(() => {
         axios
             .get(`${API}/transactions/${index}`)
             .then((response) => {
-                setTransaction(response.data)
+                setTransaction(response.data);
+                setPlaceholder(Number(response.data.amount));
             }).catch(() => {
                 navigate("/not-found")
             })
@@ -24,6 +26,7 @@ export default function TransactionDetails({setTotal}) {
             .delete(`${API}/transactions/${index}`)
             .then(() => {
                 navigate("/transactions")
+                setTotal(previous => previous - placeholder)
             }).catch((e) => console.error(e))
     };
 
