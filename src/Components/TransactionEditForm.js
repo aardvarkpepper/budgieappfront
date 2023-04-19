@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
-export default function TransactionEditForm() {
+export default function TransactionEditForm({transactions, setTransactions, setTotal}) {
     const navigate = useNavigate();
     let { index } = useParams();
     const [transaction, setTransaction] = useState({
-        id: 0,
+        idNumber: 0,
         item_name: "",
         amount: 0,
         date: "",
@@ -22,11 +22,19 @@ export default function TransactionEditForm() {
     useEffect(() => {
         axios
             .get(`${API}/transactions/${index}`)
-            .then((response) => {
+            .then((response) => {;
                 setTransaction(response.data)
             })
             .catch((e) => console.error(e))
-    }, [index])
+    }, [index, setTotal])
+    
+      useEffect(() => {
+        let totalTransactions=0;
+        transactions.forEach(transaction => {
+          totalTransactions += Number(transaction.amount);
+        });
+        setTotal(totalTransactions);
+      }, [transactions])
 
     const updateTransaction = () => {
         axios
@@ -40,7 +48,7 @@ export default function TransactionEditForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        updateTransaction();;
+        updateTransaction();
     };
 
     return (
@@ -49,7 +57,7 @@ export default function TransactionEditForm() {
                 <label htmlFor="idNumber">ID#</label>
                 <input
                     id="idNumber"
-                    value={transaction.id}
+                    value={transaction.idNumber}
                     type="number"
                     onChange={handleTextChange}
                     placeholder="0"

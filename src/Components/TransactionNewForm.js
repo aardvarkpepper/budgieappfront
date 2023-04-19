@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
-export default function TransactionNewForm({ transactions, setTransactions }) {
+export default function TransactionNewForm({ setTotal }) {
     const navigate = useNavigate();
     const [transaction, setTransaction] = useState({
         idNumber: 0,
@@ -21,6 +21,7 @@ export default function TransactionNewForm({ transactions, setTransactions }) {
     const addTransaction = () => {
         axios.post(`${API}/transactions`, transaction)
             .then(() => {
+                setTotal(previous => previous + Number(transaction.amount))
                 navigate("/transactions");
             })
             .catch((e) => console.error("catch", e))

@@ -4,7 +4,7 @@ export default function Bookmark({ transaction, index }) {
     return (
         <tr>
             <td>
-                <Link to={`/transactions/${index}`}>{transaction.id}</Link>
+                <Link to={`/transactions/${index}`}>{transaction.idNumber}</Link>
             </td>
             <td>
                 <span>{transaction.item_name}</span>
