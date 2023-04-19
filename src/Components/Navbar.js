@@ -4,6 +4,16 @@ export default function Navbar({total}) {
     const emptySpace = () => {
         return (<span>&nbsp;&nbsp;&nbsp;</span>)
     }
+
+    const colorMe = (total) => {
+        if (total > 100) {
+            return (<span className="green">Total: {total}</span>)
+        } else if (total >= 0) {
+            return (<span className="yellow">Total: {total}</span>)
+        } else {
+            return (<span className="red">Total: {total}</span>)
+        }
+    }
     return (
         <nav>
             <span>Budgeting App{emptySpace()}</span>
@@ -13,7 +23,7 @@ export default function Navbar({total}) {
             <button>
                 <Link to="transactions/new">New Transaction</Link>
             </button>
-            <span>Total: {total}</span>
+            {colorMe(total)}
         </nav>
     )
 }
