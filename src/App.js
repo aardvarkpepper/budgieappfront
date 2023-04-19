@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Error404 from "./Pages/Error404";
-import Edit from "./Pages/TransactionEdit";
-import Home from "./Pages/TransactionHome";
-import Index from "./Pages/TransactionIndex";
-import New from "./Pages/TransactionNew";
-import Show from "./Pages/TransactionShow";
+import TransactionEdit from "./Pages/TransactionEdit";
+import TransactionHome from "./Pages/TransactionHome";
+import TransactionIndex from "./Pages/TransactionIndex";
+import TransactionNew from "./Pages/TransactionNew";
+import TransactionShow from "./Pages/TransactionShow";
 
 import Navbar from "./Components/Navbar";
 

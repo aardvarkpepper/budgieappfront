@@ -1,4 +1,4 @@
-import { useState, useEffect } from "React";
+import { useState, useEffect } from "react";
 import Transaction from "./Transaction";
 import axios from "axios";
 const API = process.env.REACT_APP_API_URL;

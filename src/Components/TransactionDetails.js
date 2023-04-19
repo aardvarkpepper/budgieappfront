@@ -57,7 +57,7 @@ export default function TransactionDetails() {
             </td>
             <td>
                 <span>
-                    <Link to={"/transactions/${index}/edit"}>
+                    <Link to={`/transactions/${index}/edit`}>
                         <button>Edit</button>
                     </Link>
                 </span>
