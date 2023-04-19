@@ -2,6 +2,8 @@ Back End: https://github.com/aardvarkpepper/budgieapp
 Front End: https://github.com/aardvarkpepper/budgieappfront
 Trello: https://trello.com/b/zQEznyPW/budgeting-app-apr-18-2023
 
+Stretch goal:  Included total in app bar with css styling changes
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
