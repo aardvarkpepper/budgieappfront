@@ -13,7 +13,7 @@ export default function TransactionEditForm() {
         date: "",
         from: "",
         category: "",
-    })
+    });
 
     const handleTextChange = (event) => {
         setTransaction({ ...transaction, [event.target.id]: event.target.value })
@@ -55,6 +55,7 @@ export default function TransactionEditForm() {
                     placeholder="0"
                     required
                 />
+                <label htmlFor="item_name">Item name</label>
                 <input
                     id="item_name"
                     value={transaction.item_name}
@@ -63,6 +64,7 @@ export default function TransactionEditForm() {
                     placeholder="Item Name"
                     required
                 />
+                <label htmlFor="amount">Amount</label>
                 <input
                     id="amount"
                     value={transaction.amount}
@@ -71,6 +73,7 @@ export default function TransactionEditForm() {
                     placeholder="0"
                     required
                 />
+                <label htmlFor="date">Date(YYYY-MM-DD)</label>
                 <input
                     id="date"
                     value={transaction.date}
@@ -79,6 +82,7 @@ export default function TransactionEditForm() {
                     placeholder="Item Name"
                     required
                 />
+                <label htmlFor="from">From</label>
                 <input
                     id="from"
                     value={transaction.from}
@@ -87,6 +91,7 @@ export default function TransactionEditForm() {
                     placeholder="From"
                     required
                 />
+                <label htmlFor="category">Item name</label>
                 <input
                     id="category"
                     value={transaction.category}
