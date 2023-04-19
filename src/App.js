@@ -15,6 +15,7 @@ import './App.css';
 const API = process.env.REACT_APP_API_URL;
 
 function App() {
+  console.log("Render");
 
   const [transactions, setTransactions] = useState([]);
   const [total, setTotal] = useState(0);
@@ -26,7 +27,7 @@ function App() {
       setTransactions(response.data);
     })
     .catch((e) => console.error("catch", e))
-  }, []);
+  },[]);
 
   useEffect(() => {
     let totalTransactions=0;
@@ -45,8 +46,8 @@ function App() {
           <Route path ="/" element={<TransactionHome />} />
           <Route path ="/transactions" element={<TransactionIndex transactions={transactions} setTransactions={setTransactions} />} />
           <Route path ="/transactions/new" element={<TransactionNew setTotal={setTotal}/>} />
-          <Route path ="/transactions/:index" element={<TransactionShow />} />
-          <Route path ="/transactions/:index/edit" element={<TransactionEdit setTotal={setTotal} transactions={transactions} setTransactions={setTransactions}/>} />
+          <Route path ="/transactions/:index" element={<TransactionShow setTotal={setTotal} />} />
+          <Route path ="/transactions/:index/edit" element={<TransactionEdit setTotal={setTotal} total={total}/>} />
           <Route path ="*" element={<Error404 />} />
         </Routes>
       </main>

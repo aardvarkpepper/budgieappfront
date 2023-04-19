@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
-export default function TransactionEditForm({transactions, setTransactions, setTotal}) {
+export default function TransactionEditForm({setTotal, total}) {
     const navigate = useNavigate();
     let { index } = useParams();
     const [transaction, setTransaction] = useState({
@@ -14,33 +14,31 @@ export default function TransactionEditForm({transactions, setTransactions, setT
         from: "",
         category: "",
     });
+    const [placeholder, setPlaceholder] = useState(0);
 
     const handleTextChange = (event) => {
         setTransaction({ ...transaction, [event.target.id]: event.target.value })
     };
+    //onChange={handleTextChange}
 
     useEffect(() => {
         axios
             .get(`${API}/transactions/${index}`)
             .then((response) => {;
                 setTransaction(response.data)
+                setPlaceholder(Number(response.data.amount))
             })
             .catch((e) => console.error(e))
-    }, [index, setTotal])
-    
-      useEffect(() => {
-        let totalTransactions=0;
-        transactions.forEach(transaction => {
-          totalTransactions += Number(transaction.amount);
-        });
-        setTotal(totalTransactions);
-      }, [transactions])
+    }, [index])
 
     const updateTransaction = () => {
         axios
             .put(`${API}/transactions/${index}`, transaction)
             .then((response) => {
                 setTransaction(response.data);
+                console.log("Previous value:", placeholder);
+                console.log("New entry", Number(response.data.amount));
+                setTotal(previous => previous - placeholder + Number(response.data.amount));
                 navigate(`/transactions/${index}`)
             })
             .catch((e) => console.warn("warn", e))
@@ -59,8 +57,8 @@ export default function TransactionEditForm({transactions, setTransactions, setT
                     id="idNumber"
                     value={transaction.idNumber}
                     type="number"
-                    onChange={handleTextChange}
                     placeholder="0"
+                    onChange={handleTextChange}
                     required
                 />
                 <label htmlFor="item_name">Item name</label>
@@ -68,8 +66,8 @@ export default function TransactionEditForm({transactions, setTransactions, setT
                     id="item_name"
                     value={transaction.item_name}
                     type="text"
-                    onChange={handleTextChange}
                     placeholder="Item Name"
+                    onChange={handleTextChange}
                     required
                 />
                 <label htmlFor="amount">Amount</label>
@@ -77,8 +75,8 @@ export default function TransactionEditForm({transactions, setTransactions, setT
                     id="amount"
                     value={transaction.amount}
                     type="number"
-                    onChange={handleTextChange}
                     placeholder="0"
+                    onChange={handleTextChange}
                     required
                 />
                 <label htmlFor="date">Date(YYYY-MM-DD)</label>
@@ -86,8 +84,8 @@ export default function TransactionEditForm({transactions, setTransactions, setT
                     id="date"
                     value={transaction.date}
                     type="text"
-                    onChange={handleTextChange}
                     placeholder="Item Name"
+                    onChange={handleTextChange}
                     required
                 />
                 <label htmlFor="from">From</label>
@@ -95,8 +93,8 @@ export default function TransactionEditForm({transactions, setTransactions, setT
                     id="from"
                     value={transaction.from}
                     type="text"
-                    onChange={handleTextChange}
                     placeholder="From"
+                    onChange={handleTextChange}
                     required
                 />
                 <label htmlFor="category">Item name</label>
@@ -104,8 +102,8 @@ export default function TransactionEditForm({transactions, setTransactions, setT
                     id="category"
                     value={transaction.category}
                     type="text"
-                    onChange={handleTextChange}
                     placeholder="Category"
+                    onChange={handleTextChange}
                     required
                 />
                 <br />

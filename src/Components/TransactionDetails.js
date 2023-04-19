@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
-export default function TransactionDetails() {
+export default function TransactionDetails({setTotal}) {
     //test const vs let
     let navigate = useNavigate();
     const [transaction, setTransaction] = useState({});
