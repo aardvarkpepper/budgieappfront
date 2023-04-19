@@ -1,12 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const API = process.env.REACT_APP_API_URL;
+const API=process.env.REACT_APP_API_URL;
 
-export default function TransactionNewForm({ setTotal }) {
+export default function TransactionNewForm({ transactions, setTransactions }) {
     const navigate = useNavigate();
     const [transaction, setTransaction] = useState({
-        idNumber: 0,
+        id: 0,
         item_name: "",
         amount: 0,
         date: "",
@@ -21,7 +21,6 @@ export default function TransactionNewForm({ setTotal }) {
     const addTransaction = () => {
         axios.post(`${API}/transactions`, transaction)
             .then(() => {
-                setTotal(previous => previous + Number(transaction.amount))
                 navigate("/transactions");
             })
             .catch((e) => console.error("catch", e))
@@ -35,14 +34,14 @@ export default function TransactionNewForm({ setTotal }) {
     return (
         <div className="New">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="idNumber">ID#</label>
+            <label htmlFor="idNumber">ID#</label>
                 <input
-                id="idNumber"
-                value={transaction.idNumber}
-                type="number"
-                onChange={handleTextChange}
-                placeholder="3"
-                required
+                    id="idNumber"
+                    value={transaction.id}
+                    type="number"
+                    onChange={handleTextChange}
+                    placeholder="0"
+                    required
                 />
                 <label htmlFor="item_name">Item name</label>
                 <input
@@ -68,7 +67,7 @@ export default function TransactionNewForm({ setTotal }) {
                     value={transaction.date}
                     type="text"
                     onChange={handleTextChange}
-                    placeholder="Date(YYYY-MM-DD)"
+                    placeholder="Item Name"
                     required
                 />
                 <label htmlFor="from">From</label>
@@ -90,7 +89,7 @@ export default function TransactionNewForm({ setTotal }) {
                     required
                 />
                 <br />
-                <input type="submit" />
+                <input type="submit"/>
             </form>
         </div>
     )
