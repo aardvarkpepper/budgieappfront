@@ -6,7 +6,7 @@ const API=process.env.REACT_APP_API_URL;
 export default function TransactionNewForm({ transactions, setTransactions }) {
     const navigate = useNavigate();
     const [transaction, setTransaction] = useState({
-        id: 0,
+        idNumber: 0,
         item_name: "",
         amount: 0,
         date: "",
@@ -37,7 +37,7 @@ export default function TransactionNewForm({ transactions, setTransactions }) {
             <label htmlFor="idNumber">ID#</label>
                 <input
                     id="idNumber"
-                    value={transaction.id}
+                    value={transaction.idNumber}
                     type="number"
                     onChange={handleTextChange}
                     placeholder="0"
